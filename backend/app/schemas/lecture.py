@@ -9,6 +9,8 @@ class LectureRead(ORMModel):
     lecture_number: int
     title: str
     nptel_url: str | None
+    external_unit_id: str | None
+    external_lesson_id: str | None
     transcript_url: str | None
     youtube_url: str | None
     youtube_video_id: str | None

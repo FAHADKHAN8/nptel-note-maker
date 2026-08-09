@@ -8,7 +8,7 @@ A personal full-stack study tool for pasting an NPTEL course URL and generating 
 - Node caption microservice using `youtube-captions-scraper`; it retrieves captions only, never videos.
 - React/Vite frontend for importing courses, viewing lectures, editing transcripts, editing notes, and exporting files.
 - Gemini integration via the current `google-genai` SDK using configurable `GEMINI_MODEL`.
-- Transcript hashing, chunk hashing, cached chunk summaries, timestamp-aware chunking, structured prompts, and mocked-test-friendly service boundaries.
+- Transcript hashing, chunk hashing, cached chunk summaries, timestamp-aware chunking, official VTT parsing, structured prompts, and mocked-test-friendly service boundaries.
 - One-click course processing with persistent job progress, resume behavior, per-lecture failures, week revision notes, and a course revision guide.
 
 ## Architecture
@@ -93,13 +93,14 @@ Automated tests do not call Gemini.
 
 ## Course Import And Processing
 
-`POST /api/courses/import` accepts `{"url": "https://..."}` or the older `{"course_url": "https://..."}` shape. The parser extracts title, instructor, institution, optional course code, weeks, lecture order, NPTEL lecture links, YouTube IDs, and transcript links when those are visible in the fetched HTML.
+`POST /api/courses/import` accepts `{"url": "https://..."}` or the older `{"course_url": "https://..."}` shape. The parser extracts title, instructor, institution, optional course code, weeks, lecture order, NPTEL lecture links, external `unitId`/`lessonId`, YouTube IDs, and transcript links when those are visible in the fetched HTML.
 
 `POST /api/courses/{course_id}/process` creates a persistent job and returns quickly. The background processor resolves each lecture transcript, generates or reuses notes, records failures per lecture, synthesizes week notes from lecture notes, and synthesizes a course guide from week notes. Running processing again resumes from stored transcripts, notes, and cache metadata.
 
 ## Transcript Sources
 
 - YouTube captions through the local caption service are partially implemented.
+- Official NPTEL VTT extraction is implemented when a VTT link is discoverable. Direct VTT fetch is tried first; for `.vtt` failures, the NPTEL transcript proxy is tried anonymously.
 - Official NPTEL HTML transcript extraction is implemented when a transcript link is discoverable.
 - Official NPTEL PDF transcript extraction uses PyMuPDF when a PDF link is discoverable.
 - If official transcript extraction fails, the processor falls back to YouTube captions when a video ID exists.

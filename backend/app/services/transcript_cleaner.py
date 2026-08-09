@@ -36,7 +36,11 @@ def clean_transcript(raw_text: str, segments: list[dict] | None = None) -> Clean
             continue
         cleaned_segments.append(CaptionSegment(start=item.get("start"), duration=item.get("duration"), text=text))
         previous = text
-    combined = " ".join(segment.text for segment in cleaned_segments)
+    parts: list[str] = []
+    for segment in cleaned_segments:
+        if parts and not re.search(r"[.!?]$", parts[-1]) and re.match(r"[A-Z][a-z]", segment.text):
+            parts[-1] = parts[-1] + "."
+        parts.append(segment.text)
+    combined = " ".join(parts)
     combined = re.sub(r"\s+([,.;:?!])", r"\1", combined)
-    combined = re.sub(r"([a-z0-9])\s+([A-Z])", r"\1. \2", combined)
     return CleanedTranscript(text=combined.strip(), segments=cleaned_segments)

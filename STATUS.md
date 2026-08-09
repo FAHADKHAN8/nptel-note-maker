@@ -8,7 +8,7 @@ Last audited: 2026-08-09
 - Configuration/settings: 🟡 Implemented but incomplete. Pydantic settings exist; production hardening is minimal.
 - SQLAlchemy database setup: 🟡 Implemented but incomplete. Models exist; app still calls `create_all`.
 - Course model: 🟡 Implemented but incomplete.
-- Lecture model: 🟡 Implemented but incomplete.
+- Lecture model: 🟡 Implemented but incomplete. External NPTEL unit/lesson IDs are stored separately from display order.
 - Transcript model: 🟡 Implemented but incomplete. Content hash now exists.
 - Note model: 🟡 Implemented but incomplete. Prompt/model/transcript cache metadata now exists.
 - Job model: ✅ Verified. Tracks stage, totals, completed/failed counts, current lecture, progress, timestamps, and errors.
@@ -17,7 +17,7 @@ Last audited: 2026-08-09
 - Validation schemas: 🟡 Implemented but incomplete.
 - CORS: ✅ Complete and verified for configurable local origins.
 - Logging: ❌ Missing beyond framework defaults.
-- Tests: 🟡 Implemented but incomplete. 6 backend tests pass; coverage is narrow.
+- Tests: 🟡 Implemented but incomplete. 14 backend tests pass; coverage is still narrow.
 
 ## Course Importing
 
@@ -36,9 +36,10 @@ Last audited: 2026-08-09
 
 ## Transcript Pipeline
 
-- Official NPTEL transcript extraction: 🟡 Partial. HTML and PDF links are supported when discoverable.
+- Official NPTEL transcript extraction: 🟡 Partial. VTT, HTML, and PDF links are supported when discoverable.
 - YouTube fallback: ✅ Verified with mocked resolver path; live caption availability depends on YouTube.
 - HTML/PDF transcript handling: 🟡 Partial. HTML text and PyMuPDF PDF extraction implemented.
+- VTT parsing: ✅ Verified with synthetic raw/JSON-wrapped VTT fixture.
 - Cleaning: 🟡 Implemented and tested lightly.
 - Timestamp preservation: 🟡 Implemented for caption segments.
 - Duplicate caption removal: 🟡 Implemented with simple adjacent-duplicate logic.

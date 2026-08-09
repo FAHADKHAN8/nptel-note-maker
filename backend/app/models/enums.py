@@ -18,6 +18,7 @@ class ProcessingState(StrEnum):
 class TranscriptSource(StrEnum):
     nptel_html = "nptel_html"
     nptel_pdf = "nptel_pdf"
+    nptel_vtt = "nptel_vtt"
     nptel_subtitles = "nptel_subtitles"
     youtube_captions = "youtube_captions"
     unavailable = "unavailable"

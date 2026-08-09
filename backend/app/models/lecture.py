@@ -14,6 +14,8 @@ class Lecture(Base):
     lecture_number: Mapped[int] = mapped_column(Integer, default=1)
     title: Mapped[str] = mapped_column(String(300))
     nptel_url: Mapped[str | None] = mapped_column(String(1000))
+    external_unit_id: Mapped[str | None] = mapped_column(String(80), index=True)
+    external_lesson_id: Mapped[str | None] = mapped_column(String(80), index=True)
     transcript_url: Mapped[str | None] = mapped_column(String(1000))
     youtube_url: Mapped[str | None] = mapped_column(String(1000))
     youtube_video_id: Mapped[str | None] = mapped_column(String(20), index=True)

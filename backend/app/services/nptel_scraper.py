@@ -2,7 +2,7 @@ import asyncio
 import re
 from dataclasses import dataclass, field
 from typing import Protocol
-from urllib.parse import urljoin, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 import httpx
 from bs4 import BeautifulSoup
 from ..config import Settings
@@ -16,6 +16,8 @@ class ParsedLecture:
     lecture_number: int
     title: str
     nptel_url: str | None = None
+    external_unit_id: str | None = None
+    external_lesson_id: str | None = None
     youtube_url: str | None = None
     youtube_video_id: str | None = None
     transcript_url: str | None = None
@@ -84,12 +86,14 @@ class GenericNptelParser:
             week_match = re.search(r"\b(?:week|module)\s*[-:]?\s*(\d+)\b", text, re.I)
             if week_match:
                 current_week = int(week_match.group(1))
-            links = node.find_all("a", href=True) if hasattr(node, "find_all") else [node]
+            links = node.find_all("a", href=True) if hasattr(node, "find_all") else []
+            if getattr(node, "name", None) == "a" and node.get("href"):
+                links = [node, *links]
             hrefs = [urljoin(safe_url, link["href"]) for link in links if link.get("href")]
             youtube_url = next((href for href in hrefs if "youtube.com" in href or "youtu.be" in href), None)
             transcript_url = next((href for href in hrefs if re.search(r"(transcript|subtitle|\.pdf|\.txt|\.html?)", href, re.I)), None)
             nptel_url = next((href for href in hrefs if "nptel.ac.in" in href and href != safe_url), None)
-            lesson_url = next((href for href in hrefs if "lesson=" in href), None)
+            lesson_url = next((href for href in hrefs if "lessonId=" in href or "lesson=" in href), None)
             is_lecture = youtube_url or transcript_url or lesson_url or re.search(r"\b(?:lecture|lec)\s*[-:]?\s*\d+", text, re.I)
             if not is_lecture:
                 continue
@@ -103,11 +107,15 @@ class GenericNptelParser:
             if any(existing.youtube_video_id == video_id and video_id for existing in lectures):
                 continue
             lecture_number += 1
+            lecture_url = nptel_url or lesson_url
+            unit_id, lesson_id = self._external_ids(lecture_url)
             lectures.append(ParsedLecture(
                 week_number=int(week_match.group(1)) if week_match else inherited_week or current_week,
                 lecture_number=int(lecture_match.group(1)) if lecture_match else lecture_number,
                 title=title_text,
-                nptel_url=nptel_url or lesson_url,
+                nptel_url=lecture_url,
+                external_unit_id=unit_id,
+                external_lesson_id=lesson_id,
                 youtube_url=youtube_url,
                 youtube_video_id=video_id,
                 transcript_url=transcript_url,
@@ -136,6 +144,14 @@ class GenericNptelParser:
                 if text:
                     return text
         return None
+
+    def _external_ids(self, url: str | None) -> tuple[str | None, str | None]:
+        if not url:
+            return None, None
+        query = parse_qs(urlparse(url).query)
+        unit_id = (query.get("unitId") or query.get("unit") or [""])[0] or None
+        lesson_id = (query.get("lessonId") or query.get("lesson") or [""])[0] or None
+        return unit_id, lesson_id
 
     def _announcements_url(self, url: str) -> str | None:
         parsed = urlparse(url)

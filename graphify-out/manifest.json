@@ -45,13 +45,13 @@
     "semantic_hash": ""
   },
   "backend/app/models/enums.py": {
-    "mtime": 1786222914.6753137,
-    "ast_hash": "0e4b94cd038a306b2d7e0274f370457b",
+    "mtime": 1786270134.3234856,
+    "ast_hash": "b22b4750f6baa724d247fe80ac80bfcc",
     "semantic_hash": ""
   },
   "backend/app/models/lecture.py": {
-    "mtime": 1786222911.9036746,
-    "ast_hash": "d003e2c967f2148b7f216660f67e56ff",
+    "mtime": 1786270135.5670905,
+    "ast_hash": "e5a75a22cff845afbae0be7ffa427b19",
     "semantic_hash": ""
   },
   "backend/app/models/note.py": {
@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "backend/app/routers/courses.py": {
-    "mtime": 1786223109.7112627,
-    "ast_hash": "0f16208fcc5732306c1655c2f24d39ee",
+    "mtime": 1786270139.4509783,
+    "ast_hash": "6816c8b84e2eedaf0108303d3b9a89cc",
     "semantic_hash": ""
   },
   "backend/app/routers/exports.py": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "backend/app/schemas/lecture.py": {
-    "mtime": 1786222918.9226165,
-    "ast_hash": "c1a6c388132da8708db829d914e7cc22",
+    "mtime": 1786270136.6953056,
+    "ast_hash": "558eb6e44a92cc09faf73ff41d5ce91f",
     "semantic_hash": ""
   },
   "backend/app/schemas/note.py": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "backend/app/services/nptel_scraper.py": {
-    "mtime": 1786224252.7225788,
-    "ast_hash": "89c25b497c7bf85e2245f47d0debc23d",
+    "mtime": 1786271218.6445227,
+    "ast_hash": "fc2b673742ba97709a3168412f3def5f",
     "semantic_hash": ""
   },
   "backend/app/services/transcript_chunker.py": {
@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "backend/app/services/transcript_cleaner.py": {
-    "mtime": 1785786669.581899,
-    "ast_hash": "e099a10d4a96ca4e087893fc58cb62bf",
+    "mtime": 1786271249.9183831,
+    "ast_hash": "1e89482fe39bd4b6c7115c1fe618af8f",
     "semantic_hash": ""
   },
   "backend/app/utils/security.py": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1786224347.0575192,
-    "ast_hash": "2fd381772099d1a7ce58797691d67d62",
+    "mtime": 1786271374.2613933,
+    "ast_hash": "460dbc83dc99afab5ed33c6ff296b591",
     "semantic_hash": ""
   },
   "backend/app/prompts/chunk_notes.txt": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "STATUS.md": {
-    "mtime": 1786224348.298208,
-    "ast_hash": "ef676f37c1926f279b339bb761f9f3cf",
+    "mtime": 1786271373.0162067,
+    "ast_hash": "a9153c91d92ce446e1051e5bb4f36958",
     "semantic_hash": ""
   },
   ".codex/hooks.json": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "backend/app/services/transcript_resolver.py": {
-    "mtime": 1786223732.6186154,
-    "ast_hash": "35176650955c7e7a9f0b75f668bca11f",
+    "mtime": 1786270175.5844798,
+    "ast_hash": "3721ccdce0521994f6125f6c0c5b6313",
     "semantic_hash": ""
   },
   "backend/tests/test_api_mvp.py": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "backend/tests/test_course_processing_mvp.py": {
-    "mtime": 1786223184.9958465,
-    "ast_hash": "8b009005c2f4e3198d6b8166928629cf",
+    "mtime": 1786271221.3517222,
+    "ast_hash": "6ed2094d3fbb9c316b5f7d6fc3facad0",
     "semantic_hash": ""
   },
   "backend/app/prompts/course_synthesis.txt": {
@@ -417,6 +417,21 @@
   "backend/app/prompts/week_synthesis.txt": {
     "mtime": 1786223072.090825,
     "ast_hash": "362c4af845b107246f3cd376b542063e",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/0005_lecture_external_ids.py": {
+    "mtime": 1786270203.299041,
+    "ast_hash": "8e2b12578af204d6dc7f574f5b830391",
+    "semantic_hash": ""
+  },
+  "backend/app/services/vtt_parser.py": {
+    "mtime": 1786270174.3321214,
+    "ast_hash": "87cb838bb63dd85fd0268832b67bfe7d",
+    "semantic_hash": ""
+  },
+  "docs/NPTEL_DATA_FLOW.md": {
+    "mtime": 1786271351.6078155,
+    "ast_hash": "803124a4656b44b7e12a86eb0054618d",
     "semantic_hash": ""
   }
 }

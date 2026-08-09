@@ -9,6 +9,7 @@ from app.models.enums import ProcessingState, TranscriptSource
 from app.services.course_processor import CourseProcessor
 from app.services.nptel_scraper import GenericNptelParser
 from app.services.transcript_resolver import TranscriptResolver
+from app.services.vtt_parser import parse_vtt
 
 
 class FakeSettings:
@@ -91,6 +92,35 @@ def test_nptel_parser_extracts_fixture_metadata_and_order():
     assert parsed.lectures[2].transcript_url.endswith("/transcripts/lec3.pdf")
 
 
+def test_nptel_parser_keeps_external_ids_separate_from_order():
+    html = """
+    <h1>Course</h1>
+    <section><h2>Week 1</h2>
+      <a class="lecture" href="https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93?unitId=17&lessonId=18">Lecture 1: Intro</a>
+    </section>
+    """
+    parsed = GenericNptelParser(FakeSettings()).parse_html(html, "https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93")
+    lecture = parsed.lectures[0]
+    assert lecture.week_number == 1
+    assert lecture.lecture_number == 1
+    assert lecture.external_unit_id == "17"
+    assert lecture.external_lesson_id == "18"
+
+
+def test_vtt_parser_handles_wrapped_multiline_duplicate_malformed_and_unicode():
+    parsed = parse_vtt(
+        '"WEBVTT\\n\\n'
+        'cue-1\\n00:31.840 --> 00:38.220 align:start\\nWelcome to the course of Fundamentals of Artificial\\nIntelligence.\\n\\n'
+        'bad cue\\nnot a timestamp\\nignore me\\n\\n'
+        '00:38.220 --> 00:44.330\\n<v Instructor>Welcome to the course of Fundamentals of Artificial Intelligence.</v>\\n\\n'
+        '00:44.330 --> 00:45.000\\nUnicode π and matrix Aᵀ.\\n"'
+    )
+    assert len(parsed.segments) == 2
+    assert parsed.segments[0].start == 31.84
+    assert parsed.segments[0].text == "Welcome to the course of Fundamentals of Artificial Intelligence."
+    assert "Unicode" in parsed.text
+
+
 @pytest.mark.asyncio
 async def test_transcript_resolver_reuses_existing_transcript(db_session):
     course = Course(title="Course", source_url="https://nptel.ac.in/courses/1", total_weeks=1, total_lectures=1)
@@ -119,6 +149,28 @@ async def test_transcript_resolver_prefers_official_then_falls_back_to_youtube(m
     resolved = await TranscriptResolver(FakeSettings()).resolve(db_session, lecture)
     assert resolved.source == TranscriptSource.youtube_captions
     assert resolved.content_hash
+
+
+@pytest.mark.asyncio
+async def test_transcript_resolver_uses_official_vtt(monkeypatch, db_session):
+    class FakeResponse:
+        is_error = False
+        content = b""
+        headers = {"content-type": "text/vtt"}
+        text = "WEBVTT\n\n00:00.000 --> 00:02.000\nHello <b>AI</b> learners.\n"
+
+    async def fetch_vtt(self, client, transcript_url):
+        return FakeResponse()
+
+    monkeypatch.setattr(TranscriptResolver, "_fetch_official", fetch_vtt)
+    course = Course(title="Course", source_url="https://nptel.ac.in/courses/4", total_weeks=1, total_lectures=1)
+    lecture = Lecture(course=course, title="Lecture", week_number=1, lecture_number=1, transcript_url="https://storage.googleapis.com/test/Lec-01.vtt")
+    db_session.add(course)
+    db_session.commit()
+    resolved = await TranscriptResolver(FakeSettings()).resolve(db_session, lecture)
+    assert resolved.source == TranscriptSource.nptel_vtt
+    assert resolved.cleaned_text == "Hello AI learners."
+    assert resolved.segments_json[0]["start"] == 0.0
 
 
 @pytest.mark.asyncio

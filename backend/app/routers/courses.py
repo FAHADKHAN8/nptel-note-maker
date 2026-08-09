@@ -25,7 +25,7 @@ async def import_course(payload: CourseImportRequest, db: Session = Depends(get_
     db.add(course)
     db.flush()
     for item in parsed.lectures:
-        db.add(Lecture(course_id=course.id, week_number=item.week_number, lecture_number=item.lecture_number, title=item.title, nptel_url=item.nptel_url, transcript_url=item.transcript_url, youtube_url=item.youtube_url, youtube_video_id=item.youtube_video_id))
+        db.add(Lecture(course_id=course.id, week_number=item.week_number, lecture_number=item.lecture_number, title=item.title, nptel_url=item.nptel_url, external_unit_id=item.external_unit_id, external_lesson_id=item.external_lesson_id, transcript_url=item.transcript_url, youtube_url=item.youtube_url, youtube_video_id=item.youtube_video_id))
     db.commit()
     db.refresh(course)
     return course
