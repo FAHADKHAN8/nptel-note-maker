@@ -1,0 +1,5 @@
+import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import { useParams } from "react-router-dom";
+import { api } from "../lib/api";
+export default function NotesEditor(){const {id}=useParams();const [text,setText]=useState("");useEffect(()=>{api.get(`/api/lectures/${id}/notes`).then(r=>setText(r.data.content_markdown)).catch(()=>{})},[id]);async function generate(){const r=await api.post(`/api/lectures/${id}/generate-notes`,{detail_level:"detailed"});setText(r.data.content_markdown)}async function save(){await api.put(`/api/lectures/${id}/notes`,{content_markdown:text})}return <section><h2>Notes</h2><div className="toolbar"><button onClick={generate}>Generate</button><button onClick={save}>Save</button><a href={`${api.defaults.baseURL}/api/lectures/${id}/export/pdf`}>PDF</a><a href={`${api.defaults.baseURL}/api/lectures/${id}/export/docx`}>DOCX</a></div><div className="editor"><textarea value={text} onChange={e=>setText(e.target.value)}/><article><ReactMarkdown>{text}</ReactMarkdown></article></div></section>}

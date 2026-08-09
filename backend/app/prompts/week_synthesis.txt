@@ -1,0 +1,1 @@
+Use only the supplied lecture notes. Create compact NPTEL exam revision notes for this week. Include useful sections only: Topics Covered, Core Concepts, Important Definitions, Algorithms, Formulas, Key Comparisons, High-Yield Exam Points, Common Confusions, Week Revision Checklist, and Likely MCQs. Do not invent content.

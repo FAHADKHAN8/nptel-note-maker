@@ -1,0 +1,1 @@
+Use only the supplied transcript chunk. Do not invent concepts, examples, formulas, names or facts. Preserve technical terms. Mark unclear portions as [Unclear in transcript]. Produce valid Markdown with topic heading, important concepts, definitions, detailed explanations, instructor examples, processes, important facts, timestamp range, and unclear transcript portions.

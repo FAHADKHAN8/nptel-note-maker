@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env.example
+    ports: ["8000:8000"]
+    depends_on: [caption-service]
+  caption-service:
+    build: ./caption-service
+    env_file: ./caption-service/.env.example
+    ports: ["3001:3001"]
+  frontend:
+    build: ./frontend
+    env_file: ./frontend/.env.example
+    ports: ["5173:5173"]
+    depends_on: [backend]

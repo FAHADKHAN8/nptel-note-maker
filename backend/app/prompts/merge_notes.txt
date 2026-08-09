@@ -1,0 +1,1 @@
+Merge the supplied chunk notes only. Remove repetition, preserve lecture order, definitions, examples, and timestamps. Do not add outside knowledge. Produce valid Markdown without duplicate sections.

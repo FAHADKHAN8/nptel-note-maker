@@ -1,0 +1,1 @@
+Use only the supplied week revision notes. Create a compact course revision guide for NPTEL exam preparation. Include useful sections only: Course Outline, Major Concepts, High-Value Definitions, Major Algorithms, Important Equations, Cross-Week Connections, High-Yield Comparisons, and Revision Checklist. Do not invent content.

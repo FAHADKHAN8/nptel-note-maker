@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlalchemy>=2
+alembic
+pydantic>=2
+pydantic-settings
+httpx
+beautifulsoup4
+lxml
+pymupdf
+google-genai
+python-docx
+markdown
+pytest
+pytest-asyncio
+ruff
+mypy

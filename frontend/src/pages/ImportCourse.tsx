@@ -1,0 +1,4 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../lib/api";
+export default function ImportCourse(){const [url,setUrl]=useState("");const [error,setError]=useState("");const [loading,setLoading]=useState(false);const nav=useNavigate();async function submit(){setLoading(true);setError("");try{const course=await api.post("/api/courses/import",{url});await api.post(`/api/courses/${course.data.id}/process`);nav(`/courses/${course.data.id}`)}catch(e:any){setError(e.response?.data?.error?.message||"Import failed")}finally{setLoading(false)}}return <section><h2>NPTEL Note Maker</h2><div className="panel stack"><label>Paste NPTEL Course URL</label><input value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://nptel.ac.in/..." /><button onClick={submit} disabled={loading||!url}>{loading?"Starting...":"Generate Notes"}</button>{error&&<p className="error">{error}</p>}</div></section>}
