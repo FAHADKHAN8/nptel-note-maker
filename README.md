@@ -106,6 +106,16 @@ Automated tests do not call Gemini.
 - If official transcript extraction fails, the processor falls back to YouTube captions when a video ID exists.
 - The app never downloads YouTube videos.
 
+## Authenticated NPTEL Courses
+
+Some current NPTEL/SWAYAM e-learning course outline endpoints require a logged-in browser session even though the course page itself is publicly reachable. The app first tries anonymous discovery. If `/e-learning/api/courseoutline?course_id=...` requires authentication, you can optionally provide your own local session cookie:
+
+```env
+NPTEL_COOKIE=
+```
+
+Set this only in your local `backend/.env`. The app does not ask for or store your password, does not automate Google/SWAYAM login, does not persist the cookie in the database, and does not return it through API responses. Keep `.env` uncommitted.
+
 ## Gemini Token Usage
 
 Lecture generation stores a transcript hash, prompt version, model name, generation settings hash, and per-chunk summaries. Unchanged lecture notes are reused, and unchanged chunks are not resent to Gemini.

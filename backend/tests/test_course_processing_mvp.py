@@ -1,4 +1,5 @@
 import pytest
+import httpx
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -7,7 +8,7 @@ from app.errors import AppError
 from app.models import Course, Lecture, Note, ProcessingJob, Transcript
 from app.models.enums import ProcessingState, TranscriptSource
 from app.services.course_processor import CourseProcessor
-from app.services.nptel_scraper import GenericNptelParser
+from app.services.nptel_scraper import GenericNptelParser, NptelClient
 from app.services.transcript_resolver import TranscriptResolver
 from app.services.vtt_parser import parse_vtt
 
@@ -20,6 +21,11 @@ class FakeSettings:
     caption_service_url = "http://caption"
     caption_service_timeout = 1
     scraper_timeout = 1
+    nptel_cookie = ""
+
+
+class FakeCookieSettings(FakeSettings):
+    nptel_cookie = "SID=local-secret; HSID=another-secret"
 
 
 class FakeGemini:
@@ -105,6 +111,174 @@ def test_nptel_parser_keeps_external_ids_separate_from_order():
     assert lecture.lecture_number == 1
     assert lecture.external_unit_id == "17"
     assert lecture.external_lesson_id == "18"
+
+
+def test_nptel_client_parses_sanitized_courseoutline_fixture():
+    fixture = {
+        "course_name": "Fundamentals of Artificial Intelligence",
+        "course_id": "noc26_ge93",
+        "course_info": {"course": {"instructor": "Prof. Example", "institute": "IIT Example", "course_code": "noc26_ge93"}},
+        "units": {
+            "17": {"unit_id": 17, "title": "Week 1"},
+            "22": {"unit_id": 22, "title": "Week 2"},
+        },
+        "lessons": {
+            "18": {
+                "unit_id": 17,
+                "lesson_id": 18,
+                "title": "Lecture 1: Introduction",
+                "video_id": "abcdefghijk",
+                "video_subtitles": '{"en":"https://storage.googleapis.com/sanitized/Lec-01.vtt"}',
+                "preferred_vtt_lang": "en",
+            },
+            "19": {
+                "unit_id": 17,
+                "lesson_id": 19,
+                "title": "Lecture 2: Search",
+                "youtube_url": "https://www.youtube.com/watch?v=bcdefghijkl",
+            },
+            "23": {
+                "unit_id": 22,
+                "lesson_id": 23,
+                "title": "Lecture 3: Heuristics",
+            },
+        },
+        "order": [
+            {"id": 17, "children": [{"section": "lesson", "id": 18}, {"section": "lesson", "id": 19}]},
+            {"id": 22, "children": [{"section": "lesson", "id": 23}]},
+        ],
+    }
+    parsed = NptelClient(FakeSettings()).parse_course_outline(fixture, "https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93")
+    assert parsed.title == "Fundamentals of Artificial Intelligence"
+    assert len(parsed.lectures) == 3
+    assert [lecture.week_number for lecture in parsed.lectures] == [1, 1, 2]
+    assert [lecture.external_unit_id for lecture in parsed.lectures] == ["17", "17", "22"]
+    assert [lecture.external_lesson_id for lecture in parsed.lectures] == ["18", "19", "23"]
+    assert parsed.lectures[0].transcript_url == "https://storage.googleapis.com/sanitized/Lec-01.vtt"
+    assert parsed.lectures[0].youtube_video_id == "abcdefghijk"
+    assert parsed.lectures[1].youtube_video_id == "bcdefghijkl"
+
+
+@pytest.mark.asyncio
+async def test_nptel_client_retries_courseoutline_with_cookie_after_auth_required(monkeypatch):
+    calls = []
+    fixture = {
+        "course_name": "Authenticated Course",
+        "units": {"10": {"unit_id": 10, "title": "Week 1"}},
+        "lessons": {
+            "11": {
+                "unit_id": 10,
+                "lesson_id": 11,
+                "title": "Lecture 1",
+                "video_id": "abcdefghijk",
+                "video_subtitles": {"en": "https://storage.googleapis.com/sanitized/Lec-01.vtt"},
+            }
+        },
+        "order": [{"id": 10, "children": [{"section": "lesson", "id": 11}]}],
+    }
+
+    async def fake_get_json(self, url, authenticated=False):
+        calls.append({"url": url, "authenticated": authenticated, "cookie": self.settings.nptel_cookie if authenticated else None})
+        if not authenticated:
+            return {"status": 401, "message": "Unauthorized Error", "payload": "{\"loginurl\":\"https://swayam.gov.in/mycourses\"}"}
+        return fixture
+
+    monkeypatch.setattr(NptelClient, "_get_json", fake_get_json)
+    parsed = await NptelClient(FakeCookieSettings()).fetch_course_outline("https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93")
+    assert [call["authenticated"] for call in calls] == [False, True]
+    assert calls[0]["cookie"] is None
+    assert calls[1]["cookie"] == FakeCookieSettings.nptel_cookie
+    assert parsed.title == "Authenticated Course"
+    assert parsed.lectures[0].external_unit_id == "10"
+    assert parsed.lectures[0].external_lesson_id == "11"
+    assert parsed.lectures[0].youtube_video_id == "abcdefghijk"
+    assert parsed.lectures[0].transcript_url == "https://storage.googleapis.com/sanitized/Lec-01.vtt"
+    assert FakeCookieSettings.nptel_cookie not in repr(parsed)
+
+
+@pytest.mark.asyncio
+async def test_nptel_client_does_not_retry_without_cookie(monkeypatch):
+    calls = []
+
+    async def fake_get_json(self, url, authenticated=False):
+        calls.append(authenticated)
+        return {"status": 401, "message": "Unauthorized Error", "payload": "{\"loginurl\":\"https://swayam.gov.in/mycourses\"}"}
+
+    monkeypatch.setattr(NptelClient, "_get_json", fake_get_json)
+    parsed = await NptelClient(FakeSettings()).fetch_course_outline("https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93")
+    assert parsed is None
+    assert calls == [False]
+
+
+def test_nptel_client_redacts_cookie_from_debug_text():
+    client = NptelClient(FakeCookieSettings())
+    assert client.redact(f"failed with {FakeCookieSettings.nptel_cookie}") == "failed with [REDACTED]"
+
+
+@pytest.mark.asyncio
+async def test_nptel_client_cookie_header_only_on_authenticated_retry(monkeypatch):
+    requests = []
+    fixture = {
+        "course_name": "Authenticated Course",
+        "units": {"10": {"unit_id": 10, "title": "Week 1"}},
+        "lessons": {
+            "11": {
+                "unit_id": 10,
+                "lesson_id": 11,
+                "title": "Lecture 1",
+                "video_id": "abcdefghijk",
+                "video_subtitles": {"en": "https://storage.googleapis.com/sanitized/Lec-01.vtt"},
+            }
+        },
+        "order": [{"id": 10, "children": [{"section": "lesson", "id": 11}]}],
+    }
+
+    def handler(request):
+        requests.append(request)
+        if len(requests) == 1:
+            return httpx.Response(200, json={"status": 401, "payload": "{\"loginurl\":\"https://swayam.gov.in/mycourses\"}"})
+        return httpx.Response(200, json=fixture)
+
+    transport = httpx.MockTransport(handler)
+
+    class FakeAsyncClient(httpx.AsyncClient):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, transport=transport, **kwargs)
+
+    monkeypatch.setattr(httpx, "AsyncClient", FakeAsyncClient)
+    parsed = await NptelClient(FakeCookieSettings()).fetch_course_outline("https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93")
+
+    assert parsed.title == "Authenticated Course"
+    assert len(requests) == 2
+    assert "cookie" not in requests[0].headers
+    assert requests[1].headers["cookie"] == FakeCookieSettings.nptel_cookie
+    assert FakeCookieSettings.nptel_cookie not in repr(parsed)
+
+
+def test_nptel_client_parses_anonymous_announcement_fallback():
+    fixture = {
+        "announcements": [
+            {
+                "html": (
+                    "The lecture videos for Week-No 01 have been uploaded for the course "
+                    "Fundamentals of Artificial Intelligence. Link: "
+                    '<a href="https://onlinecourses.nptel.ac.in/noc26_ge93/unit?unit=17&amp;lesson=18">week</a>'
+                )
+            },
+            {
+                "html": (
+                    "The lecture videos for Week-No 02 have been uploaded. Link: "
+                    '<a href="https://onlinecourses.nptel.ac.in/noc26_ge93/unit?unit=22&amp;lesson=23">week</a>'
+                )
+            },
+        ]
+    }
+    parsed = NptelClient(FakeSettings()).parse_announcements(fixture, "https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93", "noc26_ge93")
+    assert parsed.title == "Fundamentals of Artificial Intelligence"
+    assert len(parsed.lectures) == 2
+    assert parsed.lectures[0].external_unit_id == "17"
+    assert parsed.lectures[0].external_lesson_id == "18"
+    assert parsed.lectures[0].transcript_url is None
 
 
 def test_vtt_parser_handles_wrapped_multiline_duplicate_malformed_and_unicode():

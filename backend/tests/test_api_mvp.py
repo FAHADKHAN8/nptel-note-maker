@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.database import Base, get_db
 from app.main import app
+from app.errors import AppError
 from app.models import Course, Lecture, Note, Transcript
 from app.models.enums import TranscriptSource
 from app.services.nptel_scraper import ParsedCourse, ParsedLecture
@@ -68,3 +69,23 @@ def test_import_process_job_and_exports(monkeypatch, tmp_path):
         assert client.get(f"/api/courses/{course_id}/export/markdown").status_code == 200
     finally:
         app.dependency_overrides.clear()
+
+
+def test_api_error_response_redacts_configured_nptel_cookie(monkeypatch):
+    secret = "SID=local-secret; HSID=another-secret"
+
+    class FakeSettings:
+        nptel_cookie = secret
+
+    monkeypatch.setattr("app.errors.get_settings", lambda: FakeSettings())
+
+    @app.get("/api/test-redaction")
+    def _redaction_route():
+        raise AppError("TEST", f"failed with {secret}", 400, {"debug": secret})
+
+    client = TestClient(app)
+    response = client.get("/api/test-redaction")
+    body = response.text
+    assert response.status_code == 400
+    assert secret not in body
+    assert "[REDACTED]" in body

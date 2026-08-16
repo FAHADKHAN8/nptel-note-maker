@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     transcript_chunk_overlap: int = 500
     scraper_request_delay: float = 1.0
     scraper_timeout: int = 30
+    nptel_cookie: str = ""
     rate_limit_per_minute: int = 12
 
     @field_validator("gemini_model")

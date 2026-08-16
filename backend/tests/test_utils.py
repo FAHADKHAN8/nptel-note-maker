@@ -1,7 +1,7 @@
 import pytest
 from app.services.transcript_cleaner import clean_transcript
 from app.services.transcript_chunker import chunk_transcript
-from app.utils.security import sanitize_filename
+from app.utils.security import redact_secret, redact_secrets, sanitize_filename
 from app.utils.url_parser import extract_youtube_video_id, validate_nptel_url
 
 
@@ -28,3 +28,13 @@ def test_chunk_transcript():
 
 def test_filename_sanitization():
     assert sanitize_filename("A/B:C*") == "A-B-C"
+
+
+def test_secret_redaction():
+    assert redact_secret("Cookie token=secret-value failed", "token=secret-value") == "Cookie [REDACTED] failed"
+
+
+def test_nested_secret_redaction():
+    secret = "SID=local-secret"
+    value = {"message": f"failed with {secret}", "items": [secret, "safe"]}
+    assert redact_secrets(value, [secret]) == {"message": "failed with [REDACTED]", "items": ["[REDACTED]", "safe"]}
