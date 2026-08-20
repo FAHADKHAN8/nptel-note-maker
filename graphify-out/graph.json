@@ -200,7 +200,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_config",
-      "community": 0,
+      "community": 1,
       "norm_label": "config.py"
     },
     {
@@ -210,7 +210,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_config_settings",
-      "community": 0,
+      "community": 1,
       "norm_label": "settings"
     },
     {
@@ -220,7 +220,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "basesettings",
-      "community": 0,
+      "community": 1,
       "norm_label": "basesettings"
     },
     {
@@ -230,7 +230,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "app_config_settings_require_model_when_key_set",
-      "community": 0,
+      "community": 1,
       "norm_label": ".require_model_when_key_set()"
     },
     {
@@ -240,7 +240,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "app_config_settings_cors_origins",
-      "community": 0,
+      "community": 1,
       "norm_label": ".cors_origins()"
     },
     {
@@ -300,7 +300,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_app_database_py_session",
-      "community": 5,
+      "community": 0,
       "norm_label": "session"
     },
     {
@@ -320,7 +320,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_errors_apperror",
-      "community": 0,
+      "community": 4,
       "norm_label": "apperror"
     },
     {
@@ -330,7 +330,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "exception",
-      "community": 0,
+      "community": 4,
       "norm_label": "exception"
     },
     {
@@ -340,7 +340,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_errors_apperror_init",
-      "community": 0,
+      "community": 4,
       "norm_label": ".__init__()"
     },
     {
@@ -620,7 +620,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "routers_courses_import_course",
-      "community": 0,
+      "community": 1,
       "norm_label": "import_course()"
     },
     {
@@ -630,7 +630,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "courseimportrequest",
-      "community": 0,
+      "community": 1,
       "norm_label": "courseimportrequest"
     },
     {
@@ -880,7 +880,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "routers_lectures",
-      "community": 8,
+      "community": 0,
       "norm_label": "lectures.py"
     },
     {
@@ -890,7 +890,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "routers_lectures_lecture",
-      "community": 8,
+      "community": 0,
       "norm_label": "_lecture()"
     },
     {
@@ -900,7 +900,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "backend_app_routers_lectures_py_session",
-      "community": 8,
+      "community": 0,
       "norm_label": "session"
     },
     {
@@ -910,7 +910,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "routers_lectures_course_lectures",
-      "community": 8,
+      "community": 0,
       "norm_label": "course_lectures()"
     },
     {
@@ -920,7 +920,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "routers_lectures_get_lecture",
-      "community": 8,
+      "community": 0,
       "norm_label": "get_lecture()"
     },
     {
@@ -930,7 +930,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "routers_lectures_extract_transcript",
-      "community": 8,
+      "community": 0,
       "norm_label": "extract_transcript()"
     },
     {
@@ -940,7 +940,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "routers_lectures_generate_notes",
-      "community": 8,
+      "community": 0,
       "norm_label": "generate_notes()"
     },
     {
@@ -950,7 +950,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "notegenerationoptions",
-      "community": 8,
+      "community": 0,
       "norm_label": "notegenerationoptions"
     },
     {
@@ -960,7 +960,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "routers_lectures_regenerate_notes",
-      "community": 8,
+      "community": 0,
       "norm_label": "regenerate_notes()"
     },
     {
@@ -980,7 +980,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "routers_notes_get_notes",
-      "community": 0,
+      "community": 4,
       "norm_label": "get_notes()"
     },
     {
@@ -990,7 +990,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_app_routers_notes_py_session",
-      "community": 0,
+      "community": 4,
       "norm_label": "session"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "routers_notes_update_notes",
-      "community": 0,
+      "community": 4,
       "norm_label": "update_notes()"
     },
     {
@@ -1010,7 +1010,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "noteupdate",
-      "community": 0,
+      "community": 4,
       "norm_label": "noteupdate"
     },
     {
@@ -1030,7 +1030,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "routers_transcripts_get_transcript",
-      "community": 0,
+      "community": 4,
       "norm_label": "get_transcript()"
     },
     {
@@ -1040,7 +1040,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_app_routers_transcripts_py_session",
-      "community": 0,
+      "community": 4,
       "norm_label": "session"
     },
     {
@@ -1050,7 +1050,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "routers_transcripts_update_transcript",
-      "community": 0,
+      "community": 1,
       "norm_label": "update_transcript()"
     },
     {
@@ -1060,7 +1060,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "transcriptupdate",
-      "community": 0,
+      "community": 1,
       "norm_label": "transcriptupdate"
     },
     {
@@ -1070,7 +1070,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "schemas_common",
-      "community": 8,
+      "community": 0,
       "norm_label": "common.py"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "schemas_common_ormmodel",
-      "community": 8,
+      "community": 0,
       "norm_label": "ormmodel"
     },
     {
@@ -1090,7 +1090,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "basemodel",
-      "community": 8,
+      "community": 0,
       "norm_label": "basemodel"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "schemas_course",
-      "community": 8,
+      "community": 0,
       "norm_label": "course.py"
     },
     {
@@ -1110,7 +1110,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "schemas_course_courseimportrequest",
-      "community": 8,
+      "community": 0,
       "norm_label": "courseimportrequest"
     },
     {
@@ -1120,7 +1120,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "schemas_course_courseimportrequest_resolved_url",
-      "community": 8,
+      "community": 0,
       "norm_label": ".resolved_url()"
     },
     {
@@ -1130,7 +1130,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "schemas_course_youtubelecturerequest",
-      "community": 8,
+      "community": 0,
       "norm_label": "youtubelecturerequest"
     },
     {
@@ -1140,7 +1140,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "schemas_course_courseread",
-      "community": 8,
+      "community": 0,
       "norm_label": "courseread"
     },
     {
@@ -1150,7 +1150,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "schemas_job",
-      "community": 8,
+      "community": 0,
       "norm_label": "job.py"
     },
     {
@@ -1160,7 +1160,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "schemas_job_jobread",
-      "community": 8,
+      "community": 0,
       "norm_label": "jobread"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "schemas_lecture",
-      "community": 8,
+      "community": 0,
       "norm_label": "lecture.py"
     },
     {
@@ -1180,7 +1180,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "schemas_lecture_lectureread",
-      "community": 8,
+      "community": 0,
       "norm_label": "lectureread"
     },
     {
@@ -1190,7 +1190,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "schemas_note",
-      "community": 8,
+      "community": 0,
       "norm_label": "note.py"
     },
     {
@@ -1200,7 +1200,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "schemas_note_notegenerationoptions",
-      "community": 8,
+      "community": 0,
       "norm_label": "notegenerationoptions"
     },
     {
@@ -1210,7 +1210,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "schemas_note_noteupdate",
-      "community": 8,
+      "community": 0,
       "norm_label": "noteupdate"
     },
     {
@@ -1220,7 +1220,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "schemas_note_noteread",
-      "community": 8,
+      "community": 0,
       "norm_label": "noteread"
     },
     {
@@ -1230,7 +1230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "schemas_transcript",
-      "community": 8,
+      "community": 0,
       "norm_label": "transcript.py"
     },
     {
@@ -1240,7 +1240,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "schemas_transcript_transcriptupdate",
-      "community": 8,
+      "community": 0,
       "norm_label": "transcriptupdate"
     },
     {
@@ -1250,7 +1250,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "schemas_transcript_transcriptread",
-      "community": 8,
+      "community": 0,
       "norm_label": "transcriptread"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_caption_client",
-      "community": 0,
+      "community": 1,
       "norm_label": "caption_client.py"
     },
     {
@@ -1580,7 +1580,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_gemini_service",
-      "community": 0,
+      "community": 1,
       "norm_label": "gemini_service.py"
     },
     {
@@ -1600,7 +1600,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "services_gemini_service_geminiservice_init",
-      "community": 13,
+      "community": 3,
       "norm_label": ".__init__()"
     },
     {
@@ -1610,7 +1610,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_app_services_gemini_service_py_settings",
-      "community": 13,
+      "community": 3,
       "norm_label": "settings"
     },
     {
@@ -1750,7 +1750,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "services_hashing_stable_hash",
-      "community": 2,
+      "community": 1,
       "norm_label": "stable_hash()"
     },
     {
@@ -1760,7 +1760,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "any",
-      "community": 2,
+      "community": 1,
       "norm_label": "any"
     },
     {
@@ -1880,7 +1880,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_nptel_scraper",
-      "community": 0,
+      "community": 5,
       "norm_label": "nptel_scraper.py"
     },
     {
@@ -2100,7 +2100,7 @@
       "source_location": "L238",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_redact",
-      "community": 13,
+      "community": 5,
       "norm_label": ".redact()"
     },
     {
@@ -2127,7 +2127,7 @@
       "label": ".parse_announcements()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L310",
+      "source_location": "L321",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_parse_announcements",
       "community": 5,
@@ -2137,7 +2137,7 @@
       "label": "._payload()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L340",
+      "source_location": "L351",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_payload",
       "community": 5,
@@ -2147,7 +2147,7 @@
       "label": "._values()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L349",
+      "source_location": "L360",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_values",
       "community": 5,
@@ -2157,7 +2157,7 @@
       "label": "._vtt_from_lesson()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L356",
+      "source_location": "L367",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_vtt_from_lesson",
       "community": 5,
@@ -2167,17 +2167,47 @@
       "label": "._youtube_from_lesson()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L369",
+      "source_location": "L380",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_youtube_from_lesson",
       "community": 5,
       "norm_label": "._youtube_from_lesson()"
     },
     {
+      "label": "._ordered_units()",
+      "file_type": "code",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L405",
+      "_origin": "ast",
+      "id": "services_nptel_scraper_nptelclient_ordered_units",
+      "community": 5,
+      "norm_label": "._ordered_units()"
+    },
+    {
+      "label": "._is_video_lecture()",
+      "file_type": "code",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L424",
+      "_origin": "ast",
+      "id": "services_nptel_scraper_nptelclient_is_video_lecture",
+      "community": 5,
+      "norm_label": "._is_video_lecture()"
+    },
+    {
+      "label": "._numeric_sort_key()",
+      "file_type": "code",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L453",
+      "_origin": "ast",
+      "id": "services_nptel_scraper_nptelclient_numeric_sort_key",
+      "community": 5,
+      "norm_label": "._numeric_sort_key()"
+    },
+    {
       "label": "._course_slug()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L387",
+      "source_location": "L457",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_course_slug",
       "community": 5,
@@ -2187,7 +2217,7 @@
       "label": "._clean()",
       "file_type": "code",
       "source_file": "backend/app/services/nptel_scraper.py",
-      "source_location": "L398",
+      "source_location": "L468",
       "_origin": "ast",
       "id": "services_nptel_scraper_nptelclient_clean",
       "community": 5,
@@ -2200,7 +2230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_transcript_chunker",
-      "community": 13,
+      "community": 1,
       "norm_label": "transcript_chunker.py"
     },
     {
@@ -2210,7 +2240,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "services_transcript_chunker_transcriptchunk",
-      "community": 13,
+      "community": 1,
       "norm_label": "transcriptchunk"
     },
     {
@@ -2220,7 +2250,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "services_transcript_chunker_chunk_transcript",
-      "community": 13,
+      "community": 1,
       "norm_label": "chunk_transcript()"
     },
     {
@@ -2440,7 +2470,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_vtt_parser",
-      "community": 5,
+      "community": 8,
       "norm_label": "vtt_parser.py"
     },
     {
@@ -2450,7 +2480,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "services_vtt_parser_vttsegment",
-      "community": 5,
+      "community": 8,
       "norm_label": "vttsegment"
     },
     {
@@ -2460,7 +2490,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "services_vtt_parser_parsedvtt",
-      "community": 5,
+      "community": 8,
       "norm_label": "parsedvtt"
     },
     {
@@ -2470,7 +2500,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "services_vtt_parser_parse_vtt",
-      "community": 5,
+      "community": 8,
       "norm_label": "parse_vtt()"
     },
     {
@@ -2480,7 +2510,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "services_vtt_parser_unwrap_json_string",
-      "community": 5,
+      "community": 8,
       "norm_label": "_unwrap_json_string()"
     },
     {
@@ -2490,7 +2520,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "services_vtt_parser_timestamp",
-      "community": 5,
+      "community": 8,
       "norm_label": "_timestamp()"
     },
     {
@@ -2500,7 +2530,7 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "services_vtt_parser_clean_cue_text",
-      "community": 5,
+      "community": 8,
       "norm_label": "_clean_cue_text()"
     },
     {
@@ -2530,7 +2560,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "utils_security_redact_secret",
-      "community": 13,
+      "community": 5,
       "norm_label": "redact_secret()"
     },
     {
@@ -2550,7 +2580,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "utils_url_parser",
-      "community": 0,
+      "community": 5,
       "norm_label": "url_parser.py"
     },
     {
@@ -2560,7 +2590,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "utils_url_parser_validate_nptel_url",
-      "community": 0,
+      "community": 5,
       "norm_label": "validate_nptel_url()"
     },
     {
@@ -2570,7 +2600,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "utils_url_parser_extract_youtube_video_id",
-      "community": 0,
+      "community": 5,
       "norm_label": "extract_youtube_video_id()"
     },
     {
@@ -2590,7 +2620,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "tests_test_api_mvp_test_import_process_job_and_exports",
-      "community": 5,
+      "community": 0,
       "norm_label": "test_import_process_job_and_exports()"
     },
     {
@@ -2617,7 +2647,7 @@
       "label": "FakeSettings",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L16",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakesettings",
       "community": 5,
@@ -2627,7 +2657,7 @@
       "label": "FakeCookieSettings",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L27",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakecookiesettings",
       "community": 5,
@@ -2637,7 +2667,7 @@
       "label": "FakeGemini",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L31",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakegemini",
       "community": 5,
@@ -2647,7 +2677,7 @@
       "label": ".__init__()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L40",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakegemini_init",
       "community": 5,
@@ -2657,7 +2687,7 @@
       "label": ".generate_chunk_summary()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L43",
+      "source_location": "L48",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakegemini_generate_chunk_summary",
       "community": 5,
@@ -2667,7 +2697,7 @@
       "label": ".synthesize_lecture_notes()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L47",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakegemini_synthesize_lecture_notes",
       "community": 5,
@@ -2677,7 +2707,7 @@
       "label": ".synthesize_week_notes()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L50",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakegemini_synthesize_week_notes",
       "community": 5,
@@ -2687,7 +2717,7 @@
       "label": ".synthesize_course_notes()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L54",
+      "source_location": "L59",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_fakegemini_synthesize_course_notes",
       "community": 5,
@@ -2697,17 +2727,17 @@
       "label": "db_session()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L60",
+      "source_location": "L65",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_db_session",
-      "community": 5,
+      "community": 0,
       "norm_label": "db_session()"
     },
     {
       "label": "test_nptel_parser_extracts_fixture_metadata_and_order()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L68",
+      "source_location": "L73",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_parser_extracts_fixture_metadata_and_order",
       "community": 5,
@@ -2717,7 +2747,7 @@
       "label": "test_nptel_parser_keeps_external_ids_separate_from_order()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L101",
+      "source_location": "L106",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_parser_keeps_external_ids_separate_from_order",
       "community": 5,
@@ -2727,17 +2757,47 @@
       "label": "test_nptel_client_parses_sanitized_courseoutline_fixture()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L116",
+      "source_location": "L121",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_client_parses_sanitized_courseoutline_fixture",
       "community": 5,
       "norm_label": "test_nptel_client_parses_sanitized_courseoutline_fixture()"
     },
     {
+      "label": "test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L167",
+      "_origin": "ast",
+      "id": "tests_test_course_processing_mvp_test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos",
+      "community": 5,
+      "norm_label": "test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos()"
+    },
+    {
+      "label": "test_nptel_client_courseoutline_transcript_source_metadata()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L193",
+      "_origin": "ast",
+      "id": "tests_test_course_processing_mvp_test_nptel_client_courseoutline_transcript_source_metadata",
+      "community": 5,
+      "norm_label": "test_nptel_client_courseoutline_transcript_source_metadata()"
+    },
+    {
+      "label": "test_nptel_client_rejects_malformed_payload_string_cleanly()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L210",
+      "_origin": "ast",
+      "id": "tests_test_course_processing_mvp_test_nptel_client_rejects_malformed_payload_string_cleanly",
+      "community": 5,
+      "norm_label": "test_nptel_client_rejects_malformed_payload_string_cleanly()"
+    },
+    {
       "label": "test_nptel_client_retries_courseoutline_with_cookie_after_auth_required()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L163",
+      "source_location": "L219",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_client_retries_courseoutline_with_cookie_after_auth_required",
       "community": 5,
@@ -2747,7 +2807,7 @@
       "label": "test_nptel_client_does_not_retry_without_cookie()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L200",
+      "source_location": "L256",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_client_does_not_retry_without_cookie",
       "community": 5,
@@ -2757,7 +2817,7 @@
       "label": "test_nptel_client_redacts_cookie_from_debug_text()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L213",
+      "source_location": "L269",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_client_redacts_cookie_from_debug_text",
       "community": 5,
@@ -2767,7 +2827,7 @@
       "label": "test_nptel_client_cookie_header_only_on_authenticated_retry()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L219",
+      "source_location": "L275",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_client_cookie_header_only_on_authenticated_retry",
       "community": 5,
@@ -2777,7 +2837,7 @@
       "label": "test_nptel_client_parses_anonymous_announcement_fallback()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L258",
+      "source_location": "L314",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_nptel_client_parses_anonymous_announcement_fallback",
       "community": 5,
@@ -2787,17 +2847,17 @@
       "label": "test_vtt_parser_handles_wrapped_multiline_duplicate_malformed_and_unicode()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L284",
+      "source_location": "L340",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_vtt_parser_handles_wrapped_multiline_duplicate_malformed_and_unicode",
-      "community": 5,
+      "community": 8,
       "norm_label": "test_vtt_parser_handles_wrapped_multiline_duplicate_malformed_and_unicode()"
     },
     {
       "label": "test_transcript_resolver_reuses_existing_transcript()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L299",
+      "source_location": "L355",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_transcript_resolver_reuses_existing_transcript",
       "community": 5,
@@ -2807,7 +2867,7 @@
       "label": "test_transcript_resolver_prefers_official_then_falls_back_to_youtube()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L310",
+      "source_location": "L366",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_transcript_resolver_prefers_official_then_falls_back_to_youtube",
       "community": 5,
@@ -2817,7 +2877,7 @@
       "label": "test_transcript_resolver_uses_official_vtt()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L329",
+      "source_location": "L385",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_transcript_resolver_uses_official_vtt",
       "community": 5,
@@ -2827,7 +2887,7 @@
       "label": "test_course_processor_partial_and_resume()",
       "file_type": "code",
       "source_file": "backend/tests/test_course_processing_mvp.py",
-      "source_location": "L351",
+      "source_location": "L407",
       "_origin": "ast",
       "id": "tests_test_course_processing_mvp_test_course_processor_partial_and_resume",
       "community": 5,
@@ -2900,7 +2960,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "tests_test_generation_cache_db_session",
-      "community": 5,
+      "community": 0,
       "norm_label": "db_session()"
     },
     {
@@ -2920,7 +2980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tests_test_utils",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_utils.py"
     },
     {
@@ -2930,7 +2990,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "tests_test_utils_test_nptel_url_validation",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_nptel_url_validation()"
     },
     {
@@ -2940,7 +3000,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "tests_test_utils_test_youtube_video_id_extraction",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_youtube_video_id_extraction()"
     },
     {
@@ -2950,7 +3010,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "tests_test_utils_test_clean_transcript_removes_noise_and_duplicates",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_clean_transcript_removes_noise_and_duplicates()"
     },
     {
@@ -2960,7 +3020,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "tests_test_utils_test_chunk_transcript",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_chunk_transcript()"
     },
     {
@@ -2970,7 +3030,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "tests_test_utils_test_filename_sanitization",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_filename_sanitization()"
     },
     {
@@ -2980,7 +3040,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "tests_test_utils_test_secret_redaction",
-      "community": 13,
+      "community": 5,
       "norm_label": "test_secret_redaction()"
     },
     {
@@ -2990,7 +3050,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "tests_test_utils_test_nested_secret_redaction",
-      "community": 13,
+      "community": 0,
       "norm_label": "test_nested_secret_redaction()"
     },
     {
@@ -12235,6 +12295,36 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L424",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient",
+      "target": "services_nptel_scraper_nptelclient_is_video_lecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L453",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient",
+      "target": "services_nptel_scraper_nptelclient_numeric_sort_key",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L405",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient",
+      "target": "services_nptel_scraper_nptelclient_ordered_units",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
       "source_location": "L276",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -12348,6 +12438,17 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp_test_nptel_client_courseoutline_transcript_source_metadata",
+      "target": "services_nptel_scraper_nptelclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/test_course_processing_mvp.py",
       "source_location": "L208",
       "weight": 1.0,
       "source": "tests_test_course_processing_mvp_test_nptel_client_does_not_retry_without_cookie",
@@ -12370,6 +12471,17 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp_test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos",
+      "target": "services_nptel_scraper_nptelclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/test_course_processing_mvp.py",
       "source_location": "L145",
       "weight": 1.0,
       "source": "tests_test_course_processing_mvp_test_nptel_client_parses_sanitized_courseoutline_fixture",
@@ -12384,6 +12496,17 @@
       "source_location": "L214",
       "weight": 1.0,
       "source": "tests_test_course_processing_mvp_test_nptel_client_redacts_cookie_from_debug_text",
+      "target": "services_nptel_scraper_nptelclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L211",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp_test_nptel_client_rejects_malformed_payload_string_cleanly",
       "target": "services_nptel_scraper_nptelclient"
     },
     {
@@ -12512,6 +12635,39 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L293",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient_parse_course_outline",
+      "target": "services_nptel_scraper_nptelclient_is_video_lecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L289",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient_parse_course_outline",
+      "target": "services_nptel_scraper_nptelclient_numeric_sort_key",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L276",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient_parse_course_outline",
+      "target": "services_nptel_scraper_nptelclient_ordered_units",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
       "source_location": "L224",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -12572,6 +12728,17 @@
       "weight": 1.0,
       "source": "services_nptel_scraper_nptelclient_youtube_from_lesson",
       "target": "utils_url_parser_extract_youtube_video_id"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/services/nptel_scraper.py",
+      "source_location": "L421",
+      "weight": 1.0,
+      "source": "services_nptel_scraper_nptelclient_ordered_units",
+      "target": "services_nptel_scraper_nptelclient_numeric_sort_key",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -13497,6 +13664,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L193",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp",
+      "target": "tests_test_course_processing_mvp_test_nptel_client_courseoutline_transcript_source_metadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
       "source_location": "L200",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13517,6 +13694,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L167",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp",
+      "target": "tests_test_course_processing_mvp_test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
       "source_location": "L110",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13532,6 +13719,16 @@
       "confidence_score": 1.0,
       "source": "tests_test_course_processing_mvp",
       "target": "tests_test_course_processing_mvp_test_nptel_client_redacts_cookie_from_debug_text"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L210",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp",
+      "target": "tests_test_course_processing_mvp_test_nptel_client_rejects_malformed_payload_string_cleanly",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -13629,6 +13826,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp_test_nptel_client_courseoutline_transcript_source_metadata",
+      "target": "tests_test_course_processing_mvp_fakesettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
       "source_location": "L208",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13651,11 +13859,33 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp_test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos",
+      "target": "tests_test_course_processing_mvp_fakesettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
       "source_location": "L145",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "tests_test_course_processing_mvp_test_nptel_client_parses_sanitized_courseoutline_fixture",
       "target": "tests_test_course_processing_mvp_fakesettings"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_course_processing_mvp.py",
+      "source_location": "L211",
+      "weight": 1.0,
+      "source": "tests_test_course_processing_mvp_test_nptel_client_rejects_malformed_payload_string_cleanly",
+      "target": "tests_test_course_processing_mvp_fakesettings",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -13912,9 +14142,9 @@
       "source_file": "backend/tests/test_utils.py",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_utils",
-      "target": "tests_test_utils_test_nested_secret_redaction",
-      "confidence_score": 1.0
+      "target": "tests_test_utils_test_nested_secret_redaction"
     },
     {
       "relation": "contains",
@@ -15678,5 +15908,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0e4675e9921b204d5ec79054343e7648807be17c"
+  "built_at_commit": "43e5fb238014d3c921e8dccfc8a97432c68a0a9e"
 }

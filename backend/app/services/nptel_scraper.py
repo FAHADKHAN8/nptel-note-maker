@@ -260,15 +260,20 @@ class NptelClient:
             return None
         course_info = payload.get("course_info") if isinstance(payload.get("course_info"), dict) else {}
         course_data = course_info.get("course") if isinstance(course_info.get("course"), dict) else {}
-        title = payload.get("course_name") or course_data.get("title") or course_data.get("name") or "NPTEL Course"
+        title = (
+            course_info.get("title")
+            or course_data.get("title")
+            or course_data.get("name")
+            or payload.get("course_name")
+            or "NPTEL Course"
+        )
         units = self._values(payload.get("units"))
         lessons = self._values(payload.get("lessons"))
         order = self._values(payload.get("order"))
         lesson_by_scope = {(str(item.get("unit_id")), str(item.get("lesson_id"))): item for item in lessons if isinstance(item, dict)}
         order_by_unit = {str(item.get("id")): item for item in order if isinstance(item, dict)}
         parsed: list[ParsedLecture] = []
-        lecture_number = 0
-        for week_number, unit in enumerate(sorted([u for u in units if isinstance(u, dict)], key=lambda u: int(u.get("unit_id") or u.get("id") or 0)), start=1):
+        for week_number, unit in enumerate(self._ordered_units(units, order), start=1):
             unit_id = str(unit.get("unit_id") or unit.get("id") or "")
             children = order_by_unit.get(unit_id, {}).get("children") or []
             ordered_lessons = []
@@ -279,8 +284,14 @@ class NptelClient:
                 if lesson:
                     ordered_lessons.append(lesson)
             if not ordered_lessons:
-                ordered_lessons = sorted([lesson for lesson in lessons if str(lesson.get("unit_id")) == unit_id], key=lambda lesson: int(lesson.get("lesson_id") or 0))
+                ordered_lessons = sorted(
+                    [lesson for lesson in lessons if isinstance(lesson, dict) and str(lesson.get("unit_id")) == unit_id],
+                    key=lambda lesson: self._numeric_sort_key(lesson.get("lesson_id")),
+                )
+            lecture_number = 0
             for lesson in ordered_lessons:
+                if not self._is_video_lecture(lesson):
+                    continue
                 lecture_number += 1
                 video_id, youtube_url = self._youtube_from_lesson(lesson)
                 parsed.append(ParsedLecture(
@@ -298,9 +309,9 @@ class NptelClient:
             return None
         return ParsedCourse(
             title=str(title),
-            instructor=course_data.get("instructor") or course_data.get("instructor_name"),
-            institute=course_data.get("institute") or course_data.get("institution"),
-            course_code=course_data.get("course_code"),
+            instructor=course_info.get("instructor") or course_info.get("faculty") or course_data.get("instructor") or course_data.get("instructor_name"),
+            institute=course_info.get("institution") or course_info.get("institute") or course_data.get("institute") or course_data.get("institution"),
+            course_code=course_info.get("course_id") or course_info.get("course_code") or course_data.get("course_code") or payload.get("course_id") or self._course_slug(course_url),
             description=course_data.get("description"),
             image_url=course_data.get("image_url") or course_data.get("thumbnail_url"),
             course_url=course_url,
@@ -343,7 +354,7 @@ class NptelClient:
             try:
                 return json.loads(payload)
             except json.JSONDecodeError:
-                return data
+                return None
         return payload
 
     def _values(self, value: object) -> list:
@@ -382,7 +393,66 @@ class NptelClient:
                 return video_id, f"https://www.youtube.com/watch?v={video_id}"
             except AppError:
                 return value, None
+        value = lesson.get("video")
+        if isinstance(value, str) and value.strip():
+            try:
+                video_id = extract_youtube_video_id(value)
+                return video_id, f"https://www.youtube.com/watch?v={video_id}"
+            except AppError:
+                pass
         return None, None
+
+    def _ordered_units(self, units: list, order: list) -> list[dict]:
+        unit_by_id = {
+            str(unit.get("unit_id") or unit.get("id")): unit
+            for unit in units
+            if isinstance(unit, dict) and (unit.get("unit_id") is not None or unit.get("id") is not None)
+        }
+        ordered = []
+        seen = set()
+        for item in order:
+            if not isinstance(item, dict):
+                continue
+            unit_id = str(item.get("id") or item.get("unit_id") or "")
+            if unit_id in unit_by_id:
+                ordered.append(unit_by_id[unit_id])
+                seen.add(unit_id)
+        remaining = [unit for unit_id, unit in unit_by_id.items() if unit_id not in seen]
+        remaining.sort(key=lambda unit: self._numeric_sort_key(unit.get("unit_id") or unit.get("id")))
+        return ordered + remaining
+
+    def _is_video_lecture(self, lesson: dict) -> bool:
+        if not isinstance(lesson, dict):
+            return False
+        type_text = " ".join(
+            str(lesson.get(key) or "")
+            for key in ("type", "lesson_type", "content_type", "resource_type", "category")
+        ).lower()
+        if any(blocked in type_text for blocked in ("assignment", "download", "resource", "feedback", "forum", "criteria", "onboarding")):
+            return False
+        if any(marker in type_text for marker in ("video", "lecture")):
+            return True
+        if lesson.get("video") or lesson.get("video_id") or lesson.get("youtube_url") or lesson.get("video_url"):
+            return True
+        title = str(lesson.get("title") or lesson.get("lesson_title") or "")
+        if re.search(r"\b(?:lec|lecture)\s*[-:]?\s*\d+", title, re.I):
+            blocked_titles = (
+                "lecture notes",
+                "feedback",
+                "assignment solution",
+                "assignment",
+                "downloadableresource",
+                "downloadable resource",
+                "discussion forum",
+                "certification criteria",
+                "onboarding",
+            )
+            return not any(blocked in title.lower() for blocked in blocked_titles)
+        return False
+
+    def _numeric_sort_key(self, value: object) -> tuple[int, str]:
+        text = str(value or "")
+        return (int(text), text) if text.isdigit() else (10**9, text)
 
     def _course_slug(self, url: str) -> str | None:
         parsed = urlparse(url)

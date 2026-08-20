@@ -1,5 +1,7 @@
 import pytest
 import httpx
+import json
+from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -11,6 +13,9 @@ from app.services.course_processor import CourseProcessor
 from app.services.nptel_scraper import GenericNptelParser, NptelClient
 from app.services.transcript_resolver import TranscriptResolver
 from app.services.vtt_parser import parse_vtt
+
+
+FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 
 class FakeSettings:
@@ -157,6 +162,57 @@ def test_nptel_client_parses_sanitized_courseoutline_fixture():
     assert parsed.lectures[0].transcript_url == "https://storage.googleapis.com/sanitized/Lec-01.vtt"
     assert parsed.lectures[0].youtube_video_id == "abcdefghijk"
     assert parsed.lectures[1].youtube_video_id == "bcdefghijkl"
+
+
+def test_nptel_client_parses_live_shape_payload_string_and_filters_non_videos():
+    fixture = json.loads((FIXTURES_DIR / "courseoutline_sanitized.json").read_text(encoding="utf-8"))
+    parsed = NptelClient(FakeSettings()).parse_course_outline(
+        fixture,
+        "https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93",
+    )
+
+    assert parsed.title == "Fundamentals of Artificial Intelligence"
+    assert parsed.instructor == "Prof. Example"
+    assert parsed.institute == "IIT Example"
+    assert parsed.course_code == "noc26_ge93"
+    assert len({lecture.week_number for lecture in parsed.lectures}) == 2
+    assert len(parsed.lectures) == 6
+    assert [lecture.external_unit_id for lecture in parsed.lectures] == ["17", "17", "17", "22", "22", "22"]
+    assert [lecture.external_lesson_id for lecture in parsed.lectures] == ["18", "19", "20", "23", "24", "25"]
+    assert [lecture.lecture_number for lecture in parsed.lectures] == [1, 2, 3, 1, 2, 3]
+    assert [lecture.title for lecture in parsed.lectures[:3]] == [
+        "Lec 1: Introduction to Artificial Intelligence",
+        "Lec 2: Problem Solving as State Space Search",
+        "Lec 3: Uninformed Search",
+    ]
+    assert all("Assignment" not in lecture.title for lecture in parsed.lectures)
+    assert all("Feedback" not in lecture.title for lecture in parsed.lectures)
+    assert all("Lecture Notes" not in lecture.title for lecture in parsed.lectures)
+
+
+def test_nptel_client_courseoutline_transcript_source_metadata():
+    fixture = json.loads((FIXTURES_DIR / "courseoutline_sanitized.json").read_text(encoding="utf-8"))
+    parsed = NptelClient(FakeSettings()).parse_course_outline(
+        fixture,
+        "https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93",
+    )
+    lecture_a = parsed.lectures[0]
+    lecture_b = parsed.lectures[1]
+
+    assert lecture_a.transcript_url == "https://storage.googleapis.com/sanitized/noc26_ge93/Lec-01.vtt"
+    assert lecture_a.youtube_video_id == "abcdefghijk"
+    assert lecture_a.youtube_url == "https://www.youtube.com/watch?v=abcdefghijk"
+    assert lecture_b.transcript_url is None
+    assert lecture_b.youtube_video_id == "bcdefghijkl"
+    assert lecture_b.youtube_url == "https://www.youtube.com/watch?v=bcdefghijkl"
+
+
+def test_nptel_client_rejects_malformed_payload_string_cleanly():
+    parsed = NptelClient(FakeSettings()).parse_course_outline(
+        {"status": 200, "payload": "{\"course_info\":"},
+        "https://onlinecourses.nptel.ac.in/e-learning/course/noc26_ge93",
+    )
+    assert parsed is None
 
 
 @pytest.mark.asyncio

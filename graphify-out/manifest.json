@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "backend/app/services/nptel_scraper.py": {
-    "mtime": 1786817066.9105167,
-    "ast_hash": "cb98776739ca1ff22d9d1a5651e7b002",
+    "mtime": 1787242584.7353814,
+    "ast_hash": "495aeab7a3dcc6b32341081b039385f5",
     "semantic_hash": ""
   },
   "backend/app/services/transcript_chunker.py": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "backend/tests/test_course_processing_mvp.py": {
-    "mtime": 1786817081.4129765,
-    "ast_hash": "efbf80fb5dcb0747cc1af08ab534e92f",
+    "mtime": 1787242623.6060054,
+    "ast_hash": "914f2769dce65e1703f7513003d58496",
     "semantic_hash": ""
   },
   "backend/app/prompts/course_synthesis.txt": {
@@ -432,6 +432,11 @@
   "docs/NPTEL_DATA_FLOW.md": {
     "mtime": 1786282177.0166144,
     "ast_hash": "a0490a66369cb03514abf96eeb7b4dbb",
+    "semantic_hash": ""
+  },
+  "backend/tests/fixtures/courseoutline_sanitized.json": {
+    "mtime": 1787242602.817755,
+    "ast_hash": "dd2150fd0aef3d2037994f2a554d9153",
     "semantic_hash": ""
   }
 }

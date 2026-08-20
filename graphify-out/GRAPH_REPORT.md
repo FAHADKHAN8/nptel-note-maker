@@ -1,16 +1,16 @@
-# Graph Report - NPTEL NOTES MAKER  (2026-08-16)
+# Graph Report - NPTEL NOTES MAKER  (2026-08-20)
 
 ## Corpus Check
-- 79 files · ~20,698 words
+- 80 files · ~21,193 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 477 nodes · 1033 edges · 37 communities (33 shown, 4 thin omitted)
-- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 110 edges (avg confidence: 0.56)
+- 483 nodes · 1049 edges · 36 communities (32 shown, 4 thin omitted)
+- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 113 edges (avg confidence: 0.57)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0e4675e9`
+- Built from commit: `43e5fb23`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -28,7 +28,6 @@
 - [[_COMMUNITY_Community 10|Community 10]]
 - [[_COMMUNITY_Community 11|Community 11]]
 - [[_COMMUNITY_Community 12|Community 12]]
-- [[_COMMUNITY_Community 13|Community 13]]
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 16|Community 16]]
@@ -46,55 +45,55 @@
 ## God Nodes (most connected - your core abstractions)
 1. `AppError` - 49 edges
 2. `GeminiService` - 33 edges
-3. `NotesPipeline` - 25 edges
-4. `NptelClient` - 25 edges
+3. `NptelClient` - 31 edges
+4. `NotesPipeline` - 25 edges
 5. `TranscriptResolver` - 24 edges
 6. `Base` - 22 edges
-7. `CaptionClient` - 20 edges
-8. `CourseProcessor` - 20 edges
-9. `FakeSettings` - 19 edges
+7. `FakeSettings` - 22 edges
+8. `CaptionClient` - 20 edges
+9. `CourseProcessor` - 20 edges
 10. `NPTEL AI Notes Generator` - 18 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `Settings` --uses--> `TranscriptChunk`  [INFERRED]
+  backend/app/services/gemini_service.py → backend/app/services/transcript_chunker.py
+- `test_chunk_transcript()` --calls--> `chunk_transcript()`  [INFERRED]
+  backend/tests/test_utils.py → backend/app/services/transcript_chunker.py
 - `test_clean_transcript_removes_noise_and_duplicates()` --calls--> `clean_transcript()`  [INFERRED]
   backend/tests/test_utils.py → backend/app/services/transcript_cleaner.py
 - `test_filename_sanitization()` --calls--> `sanitize_filename()`  [INFERRED]
   backend/tests/test_utils.py → backend/app/utils/security.py
-- `test_nptel_url_validation()` --calls--> `validate_nptel_url()`  [INFERRED]
-  backend/tests/test_utils.py → backend/app/utils/url_parser.py
-- `test_youtube_video_id_extraction()` --calls--> `extract_youtube_video_id()`  [INFERRED]
-  backend/tests/test_utils.py → backend/app/utils/url_parser.py
 - `FakeCookieSettings` --uses--> `Base`  [INFERRED]
   backend/tests/test_course_processing_mvp.py → backend/app/database.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (37 total, 4 thin omitted)
+## Communities (36 total, 4 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.09
-Nodes (33): run_migrations_offline(), get_settings(), Settings, get_db(), app_error_handler(), AppError, Session, Session (+25 more)
+Cohesion: 0.07
+Nodes (42): run_migrations_offline(), get_settings(), get_db(), app_error_handler(), Session, Session, Session, Session (+34 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.16
-Nodes (17): Base, DeclarativeBase, GeneratedChunkCache, CourseArtifact, Course, ProcessingState, TranscriptSource, Lecture (+9 more)
+Cohesion: 0.10
+Nodes (27): Any, Settings, Base, BaseSettings, CourseImportRequest, DeclarativeBase, GeneratedChunkCache, CourseArtifact (+19 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.13
-Nodes (20): Any, AsyncClient, Settings, Lecture, Session, Settings, Transcript, Lecture (+12 more)
+Cohesion: 0.14
+Nodes (18): AsyncClient, Settings, Lecture, Session, Settings, Transcript, Lecture, Response (+10 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.17
-Nodes (11): Course, Lecture, Session, Settings, CourseArtifact, ProcessingJob, CourseProcessor, JobStage (+3 more)
+Cohesion: 0.16
+Nodes (12): Course, Lecture, Session, Settings, Settings, CourseArtifact, ProcessingJob, CourseProcessor (+4 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.29
-Nodes (18): Response, Session, Course, Lecture, course_docx(), course_md(), course_obsidian(), course_pdf() (+10 more)
+Cohesion: 0.18
+Nodes (26): AppError, Response, Session, Session, Session, Course, Lecture, Exception (+18 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.07
-Nodes (34): Session, Settings, BeautifulSoup, Protocol, CourseParser, GenericNptelParser, NptelClient, ParsedCourse (+26 more)
+Nodes (35): Settings, BeautifulSoup, Protocol, CourseParser, GenericNptelParser, NptelClient, ParsedCourse, ParsedLecture (+27 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.08
@@ -105,8 +104,8 @@ Cohesion: 0.09
 Nodes (21): dependencies, axios, lucide-react, react, react-dom, react-markdown, react-router-dom, @vitejs/plugin-react (+13 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.17
-Nodes (20): Session, BaseModel, NoteGenerationOptions, course_lectures(), extract_transcript(), generate_notes(), get_lecture(), _lecture() (+12 more)
+Cohesion: 0.43
+Nodes (7): _clean_cue_text(), parse_vtt(), ParsedVtt, _timestamp(), _unwrap_json_string(), VttSegment, test_vtt_parser_handles_wrapped_multiline_duplicate_malformed_and_unicode()
 
 ### Community 9 - "Community 9"
 Cohesion: 0.11
@@ -123,10 +122,6 @@ Nodes (6): api, CourseDetails(), Dashboard(), ImportCourse(), NotesEditor(), Tra
 ### Community 12 - "Community 12"
 Cohesion: 0.14
 Nodes (13): Batch Course Processing, Course Importing, End-to-End Flow, Export System, Frontend, Gemini Integration, Highest Priority Next Steps, Jobs (+5 more)
-
-### Community 13 - "Community 13"
-Cohesion: 0.14
-Nodes (11): Settings, chunk_transcript(), TranscriptChunk, test_chunk_transcript(), test_clean_transcript_removes_noise_and_duplicates(), test_filename_sanitization(), test_nested_secret_redaction(), test_nptel_url_validation() (+3 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.18
@@ -172,17 +167,17 @@ Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphif
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `AppError` connect `Community 0` to `Community 1`, `Community 2`, `Community 3`, `Community 4`, `Community 5`, `Community 8`?**
-  _High betweenness centrality (0.110) - this node is a cross-community bridge._
-- **Why does `GeminiService` connect `Community 3` to `Community 0`, `Community 1`, `Community 2`, `Community 13`?**
+- **Why does `AppError` connect `Community 4` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 5`?**
+  _High betweenness centrality (0.111) - this node is a cross-community bridge._
+- **Why does `GeminiService` connect `Community 3` to `Community 1`, `Community 2`?**
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `NotesPipeline` connect `Community 3` to `Community 8`, `Community 1`, `Community 2`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `AppError` (e.g. with `FakeCookieSettings` and `FakeGemini`) actually correct?**
   _`AppError` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 15 inferred relationships involving `GeminiService` (e.g. with `Course` and `Lecture`) actually correct?**
   _`GeminiService` has 15 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 12 inferred relationships involving `NptelClient` (e.g. with `FakeCookieSettings` and `FakeGemini`) actually correct?**
+  _`NptelClient` has 12 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 14 inferred relationships involving `NotesPipeline` (e.g. with `Course` and `Lecture`) actually correct?**
   _`NotesPipeline` has 14 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 9 inferred relationships involving `NptelClient` (e.g. with `FakeCookieSettings` and `FakeGemini`) actually correct?**
-  _`NptelClient` has 9 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 13 inferred relationships involving `TranscriptResolver` (e.g. with `Lecture` and `Session`) actually correct?**
+  _`TranscriptResolver` has 13 INFERRED edges - model-reasoned connections that need verification._
